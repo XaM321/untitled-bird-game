@@ -24,7 +24,7 @@ class Engine(Tickable, Renderable, EventListener):
         self.logger: Logger = Logger("Engine")
         self._flags: int = flags
         
-        self.screen = pygame.display.set_mode((2560, 1440), pygame.DOUBLEBUF | pygame.NOFRAME, vsync = 1)
+        self.screen = pygame.display.set_mode((1080, 720), pygame.DOUBLEBUF | pygame.NOFRAME, vsync = 1)
         self.display: pygame.Surface = pygame.Surface((1920, 1080))
         self.fps: int = 0
         self._deltatime: float = 0.0

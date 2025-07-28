@@ -9,6 +9,7 @@ from Box2D import b2World, b2PolygonShape, b2BodyDef, b2Body
 from typing import Final, overload
 
 PPM: Final[int | float] = 20
+PHYSICS_STEP: Final[float] = 1 / 60
 VEL_ITERS: Final[int] = 6
 POS_ITERS: Final[int] = 2
 
@@ -129,20 +130,20 @@ class World(b2World, Tickable, Renderable):
         return ground
     
     @overload
-    def create_dynamic_body(self, position: pygame.Vector2, width: int, height: int) -> b2Body:
+    def create_dynamic_body(self, position: pygame.Vector2, width: int, height: int, *, density: float = 1.0, friction: float = 0.3, restitution: float = 0.5) -> b2Body:
         ...
 
     @overload
-    def create_dynamic_body(self, position: tuple[int, int], width: int, height: int) -> b2Body:
+    def create_dynamic_body(self, position: tuple[int, int], width: int, height: int, *, density: float = 1.0, friction: float = 0.3, restitution: float = 0.5) -> b2Body:
         ...
 
-    def create_dynamic_body(self, position: pygame.Vector2 | tuple[int, int], width: int, height: int) -> b2Body:
+    def create_dynamic_body(self, position: pygame.Vector2 | tuple[int, int], width: int, height: int, *, density: float = 1.0, friction: float = 0.3, restitution: float = 0.5) -> b2Body:
         body: b2Body = self.CreateDynamicBody(position = self.to_b2_position(position, width, height))
         body.CreatePolygonFixture(
             box = (self.pixels_to_metres(width / 2), self.pixels_to_metres(height / 2)),
-            density = 1,
-            friction = 0.3,
-            restitution = 0.5
+            density = density,
+            friction = friction,
+            restitution = restitution
         )
 
         return body
@@ -165,7 +166,7 @@ class World(b2World, Tickable, Renderable):
         return body
     
     def tick(self, deltatime: float) -> None:
-        self.Step(deltatime, VEL_ITERS, POS_ITERS)
+        self.Step(PHYSICS_STEP, VEL_ITERS, POS_ITERS)
 
     def render(self, surface: pygame.Surface, deltatime: float) -> None:
         ground_vertices = [(self._ground_body.transform * v) * PPM for v in self._ground_body.fixtures[0].shape.vertices]
