@@ -1,2 +1,2 @@
 pygame-ce
-pybox2d
+Box2D
