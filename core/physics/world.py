@@ -22,7 +22,7 @@ class World(b2World, Tickable, Renderable):
         self._width: int = width
         self._height: int = height
         self._ground_body: b2BodyDef = self._create_ground_body()
-        self._bodies: list[b2Body] = [self.create_dynamic_body((200, 0), 40, 40), self.create_dynamic_body((400, 0), 40, 40), self.create_dynamic_body((600, 0), 40, 40)]
+        self._bodies: list[b2Body] = [self.create_dynamic_body((200, 0), 40, 40), self.create_dynamic_body((210, 100), 40, 40), self.create_dynamic_body((600, 0), 40, 40)]
 
         # for body in bodies
         # .render() if body instanceof MyBodyClass
