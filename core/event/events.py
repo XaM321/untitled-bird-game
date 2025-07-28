@@ -1,0 +1,21 @@
+from enum import Enum
+
+class EngineEvent(Enum):
+    START = "start"
+    STOP = "stop"
+    TICK = "tick"
+    RENDER = "render"
+    KEY = "key"
+    KEYDOWN = "keydown"
+    KEYUP = "keyup"
+    MOUSE = "mouse"
+    MOUSEBUTTONDOWN = "mousebuttondown"
+    MOUSEBUTTONUP = "mousebuttonup"
+    MOUSEMOTION = "mousemotion"
+    NETWORK_CLIENT_PACKET_SEND = "clientpacketsend"
+    NETWORK_CLIENT_PACKET_RECEIVE = "clientpacketreceive"
+    NETWORK_CLIENT_CONNECTING = "beginconnect"
+    NETWORK_CONNECT_SUCCESS = "connectsuccess"
+    NETWORK_CONNECT_FAIL = "connectfail"
+    NETWORK_SERVER_PACKET_SEND = "serverpacketsend"
+    NETWORK_SERVER_PACKET_RECEIVE = "serverpacketreceive"
